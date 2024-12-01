@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Meta>
+	<title>Panda's Invoke Mod</title>
+	<id>Mod_PandaInvokeMod</id>
+	<author>Now Happy Panda</author>
+	<loadPriority>100</loadPriority>
+	<description>
+		Add "It triggers x spell" enchantments to melee weapons and gun mods
+	</description>
+	<version>0.23.45</version>
+</Meta>
