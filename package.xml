@@ -3,9 +3,10 @@
 	<title>Panda's Invoke Mod</title>
 	<id>Mod_PandaInvokeMod</id>
 	<author>Now Happy Panda</author>
+	<tags>General,Cheat,Item</tags>
 	<loadPriority>100</loadPriority>
 	<description>
 		Add "It triggers x spell" enchantments to melee weapons and gun mods
 	</description>
-	<version>0.23.45</version>
+	<version>0.23.48</version>
 </Meta>
