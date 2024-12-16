@@ -11,17 +11,18 @@ internal class Ench_Gen_Patch
 {
     [HarmonyTranspiler]
     [HarmonyPatch(typeof(Thing), nameof(Thing.GetEnchant))]
-    internal static IEnumerable<CodeInstruction> GetEnchantIl(IEnumerable<CodeInstruction> instructions)
+    internal static IEnumerable<CodeInstruction> OnSetCategoryFlagIl(IEnumerable<CodeInstruction> instructions)
     {
-        return new CodeMatcher(instructions)
-            .MatchStartForward(
-                new CodeMatch(o => o.opcode == OpCodes.Ldstr &&
-                                   o.operand.ToString().Contains("resist")))
-            .InsertAndAdvance(
-                new CodeInstruction(OpCodes.Ldarg_1),
-                new CodeInstruction(OpCodes.Ldstr, "ability"),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(string), "op_Equality")),
-                new CodeInstruction(OpCodes.Or))
+        var cm = new CodeMatcher(instructions);
+        return cm.MatchStartForward(
+                new CodeMatch(OpCodes.Ldloc_S),
+                new CodeMatch(OpCodes.Ldstr),
+                new CodeMatch(OpCodes.Call),
+                new CodeMatch(OpCodes.Brtrue))
+            .Insert(
+                cm.InstructionsInRange(cm.Pos, cm.Pos + 3))
+            .Advance(1)
+            .SetOperandAndAdvance("ability")
             .InstructionEnumeration();
     }
 }
